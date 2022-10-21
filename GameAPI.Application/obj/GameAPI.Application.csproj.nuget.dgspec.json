@@ -1,0 +1,128 @@
+{
+  "format": 1,
+  "restore": {
+    "E:\\Сабина, курс\\GameAPI\\GameAPI.Application\\GameAPI.Application.csproj": {}
+  },
+  "projects": {
+    "E:\\Сабина, курс\\GameAPI\\GameAPI.Application\\GameAPI.Application.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\Сабина, курс\\GameAPI\\GameAPI.Application\\GameAPI.Application.csproj",
+        "projectName": "GameAPI.Application",
+        "projectPath": "E:\\Сабина, курс\\GameAPI\\GameAPI.Application\\GameAPI.Application.csproj",
+        "packagesPath": "C:\\Users\\Ferdenant\\.nuget\\packages\\",
+        "outputPath": "E:\\Сабина, курс\\GameAPI\\GameAPI.Application\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Ferdenant\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "E:\\Сабина, курс\\GameAPI\\GameAPI.Domain\\GameAPI.Domain.csproj": {
+                "projectPath": "E:\\Сабина, курс\\GameAPI\\GameAPI.Domain\\GameAPI.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "E:\\Сабина, курс\\GameAPI\\GameAPI.Domain\\GameAPI.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\Сабина, курс\\GameAPI\\GameAPI.Domain\\GameAPI.Domain.csproj",
+        "projectName": "GameAPI.Domain",
+        "projectPath": "E:\\Сабина, курс\\GameAPI\\GameAPI.Domain\\GameAPI.Domain.csproj",
+        "packagesPath": "C:\\Users\\Ferdenant\\.nuget\\packages\\",
+        "outputPath": "E:\\Сабина, курс\\GameAPI\\GameAPI.Domain\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Ferdenant\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[6.0.7, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
