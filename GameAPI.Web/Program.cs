@@ -17,6 +17,8 @@ builder.Services.AddScoped<IGameRepository, GameRepository>();
 builder.Services.AddScoped<IGenreRepository, GenreRepository>();
 builder.Services.AddScoped<IDeveloperRepository, DeveloperRepository>();
 builder.Services.AddScoped<IGameService, GameService>();
+builder.Services.AddScoped<IGenreService, GenreService>();
+builder.Services.AddScoped<IDeveloperService, DeveloperService>();
 
 builder.Services.AddMvc(options =>
 {
