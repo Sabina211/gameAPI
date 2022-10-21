@@ -4,12 +4,19 @@ using GameAPI.Infrastructure;
 using GameAPI.Infrastructure.Repositories;
 using GameAPI.Web.Middlewares;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+//builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "GameAPI", Version = "v1" });
+    var filePath = Path.Combine(System.AppContext.BaseDirectory, "MyApi.xml");
+    c.IncludeXmlComments(filePath);
+});
 builder.Services.AddDbContext<GameDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("GameDb"),
         x => x.MigrationsAssembly("GameAPI.Infrastructure")));

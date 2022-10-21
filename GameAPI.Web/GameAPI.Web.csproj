@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -6,6 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>72b0d0f6-db1b-4dec-9317-697f85c61830</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <DocumentationFile>E:\Сабина, курс\Тренировочные\GameAPI\GameAPI.Web\GameAPI.Web\bin\Debug\net6.0\MyApi.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
