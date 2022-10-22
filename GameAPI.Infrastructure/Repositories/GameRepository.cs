@@ -29,22 +29,22 @@ public class GameRepository : IGameRepository
          return result.Entity.Id;
     }
 
-    public async Task Delete(Guid entity)
+    public async Task Delete(Guid id)
     {
-        var game = await _gameDbContext.Games.FirstOrDefaultAsync();
-        if (game == null) throw new EntityNotFoundException();
+        var game = await _gameDbContext.Games.FirstOrDefaultAsync(x=>x.Id==id);
+        if (game == null) throw new EntityNotFoundException($"»гра с id = {id} не найдена");
         _gameDbContext.Games.Remove(game);
         await _gameDbContext.SaveChangesAsync();
     }
 
     public List<GameEntity> GetAll()
     {
-        var res = _gameDbContext.Games
+        var result = _gameDbContext.Games
             .Include(x => x.Genres)
             .Include(x => x.DeveloperStudio)
             .ToList();
 
-        return res;
+        return result;
     }
 
     public async Task<GameEntity> GetById(Guid id)
@@ -54,7 +54,7 @@ public class GameRepository : IGameRepository
             .Include(x => x.DeveloperStudio)
             .FirstOrDefaultAsync(x => x.Id == id);
 
-        if (result == null) throw new EntityNotFoundException();
+        if (result == null) throw new EntityNotFoundException($"»гра с id = {id} не найдена");
 
         return result;
     }
@@ -73,7 +73,12 @@ public class GameRepository : IGameRepository
 
     public async Task<GameEntity> Update(GameEntity game)
     {
-        var result = _gameDbContext.Games.Update(game);
+        //var test1 = _gameDbContext.Games.Where(x => x.Id == game.Id).ToList();
+        //var test = _gameDbContext.Games.Where(x=>x.Id==game.Id).Select(p=>p.Genres).AsNoTracking().ToList();
+        var asd = _gameDbContext.ChangeTracker.Entries();
+        var result = _gameDbContext.Set<GameEntity>().Update(game);
+        
+        //var result = _gameDbContext.Games.Update(game);
         await _gameDbContext.SaveChangesAsync();
         return result.Entity;
     }

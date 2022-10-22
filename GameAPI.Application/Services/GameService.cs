@@ -1,7 +1,6 @@
 ﻿using GameAPI.Domain.Entities;
 using GameAPI.Domain.Models;
 using GameAPI.Domain.Repositories;
-using System.Xml.Linq;
 
 namespace GameAPI.Application.Services
 {
@@ -56,9 +55,9 @@ namespace GameAPI.Application.Services
         public async Task<List<GameResponseModel>> GetByGenres(List<Guid> ids)
         {
             if (ids.Count==0) return GetAll();
-            var test = await _genreRepository.GetByIds(ids);
+            var genres = await _genreRepository.GetByIds(ids);
             var gameCollection = new List<GameEntity>();
-            foreach (var item in test)
+            foreach (var item in genres)
             {
                 foreach (var game in item.Games)
                 {
@@ -66,9 +65,7 @@ namespace GameAPI.Application.Services
                 }
             }
 
-            var games = new List<GameEntity>();
-            games.AddRange(gameCollection.Distinct());
-            var last = games.Select(x => new GameResponseModel
+            var result = gameCollection.Distinct().Select(x => new GameResponseModel
             {
                 Id = x.Id,
                 Name = x.Name,
@@ -76,12 +73,25 @@ namespace GameAPI.Application.Services
                 Genres = x.Genres.Select(p => new GenreModel { Id = p.Id, Name = p.Name }).ToList()
             }).ToList();
 
-            return last;
+            return result;
         }
 
-        public async Task<GameEntity> Update(GameEntity game)
+        public async Task<GameResponseModel> Update(GameModel game)
         {
-            return await _gameRepository.Update(game);
+            var updatedGame = await _gameRepository.Update(new GameEntity
+            {
+                Id = game.Id,
+                Name = game.Name,
+                DeveloperStudio = await _developerRepository.GetById(game.DeveloperStudioId),
+                Genres = await _genreRepository.GetByIds(game.GenresIds)
+            });
+            return new GameResponseModel()
+            {
+                Id = updatedGame.Id,
+                Name = updatedGame.Name,
+                Developer = updatedGame.DeveloperStudio,
+                Genres = updatedGame.Genres.Select(p => new GenreModel { Id = p.Id, Name = p.Name }).ToList()
+            };
         }
     }
 }

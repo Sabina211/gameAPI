@@ -19,17 +19,20 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddDbContext<GameDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("GameDb"),
         x => x.MigrationsAssembly("GameAPI.Infrastructure")));
+
+/*builder.Services.AddDbContext<GameDbContext>(options => {
+    options.UseNpgsql(builder.Configuration.GetConnectionString("GameDb"),
+        x => x.MigrationsAssembly("GameAPI.Infrastructure"));
+    options.EnableSensitiveDataLogging();
+});*/
+
+//builder.Services.AddScoped<DbContext, GameDbContext>();
 builder.Services.AddScoped<IGameRepository, GameRepository>();
 builder.Services.AddScoped<IGenreRepository, GenreRepository>();
 builder.Services.AddScoped<IDeveloperRepository, DeveloperRepository>();
 builder.Services.AddScoped<IGameService, GameService>();
 builder.Services.AddScoped<IGenreService, GenreService>();
 builder.Services.AddScoped<IDeveloperService, DeveloperService>();
-
-/*builder.Services.AddMvc(options =>
-{
-    options.Filters.Add(typeof(CustomExceptionFilter));
-});*/
 
 builder.Services.AddControllersWithViews(options =>
 {

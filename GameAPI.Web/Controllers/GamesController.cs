@@ -52,7 +52,7 @@ namespace GameAPI.Web.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update(GameEntity game)
+        public async Task<IActionResult> Update(GameModel game)
         {
             var result = await _gameService.Update(game);
             return Ok(new { result });
