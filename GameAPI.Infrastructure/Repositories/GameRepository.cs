@@ -73,13 +73,12 @@ public class GameRepository : IGameRepository
 
     public async Task<GameEntity> Update(GameEntity game)
     {
-        //var test1 = _gameDbContext.Games.Where(x => x.Id == game.Id).ToList();
-        //var test = _gameDbContext.Games.Where(x=>x.Id==game.Id).Select(p=>p.Genres).AsNoTracking().ToList();
-        var asd = _gameDbContext.ChangeTracker.Entries();
-        var result = _gameDbContext.Set<GameEntity>().Update(game);
-        
-        //var result = _gameDbContext.Games.Update(game);
+        var qwe = await GetById(game.Id);
+        qwe.Name = game.Name;
+        qwe.DeveloperStudio = game.DeveloperStudio;
+        qwe.Genres = game.Genres;
         await _gameDbContext.SaveChangesAsync();
-        return result.Entity;
+
+        return await GetById(game.Id);
     }
 }

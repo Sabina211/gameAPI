@@ -1,7 +1,5 @@
 ﻿using GameAPI.Application.Services;
-using GameAPI.Domain.Entities;
 using GameAPI.Domain.Models;
-using GameAPI.Web.Middlewares;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GameAPI.Web.Controllers
@@ -28,13 +26,6 @@ namespace GameAPI.Web.Controllers
         public IActionResult GetAll()
         {
             var games = _gameService.GetAll();
-            return Ok(new { games });
-        }
-
-        [HttpGet("{id:guid}")]
-        public async Task<IActionResult> GetByGenre(Guid id)
-        {
-            var games = await _gameService.GetById(id);
             return Ok(new { games });
         }
 

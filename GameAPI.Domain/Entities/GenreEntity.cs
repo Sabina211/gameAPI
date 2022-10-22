@@ -4,5 +4,4 @@ public class GenreEntity : BaseEntity
 {
     public string Name { get; set; } = null!;
     public List<GameEntity>? Games { get; set; }
-    //public List<Guid>? GameIds { get; set; }
 }

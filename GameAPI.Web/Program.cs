@@ -20,13 +20,6 @@ builder.Services.AddDbContext<GameDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("GameDb"),
         x => x.MigrationsAssembly("GameAPI.Infrastructure")));
 
-/*builder.Services.AddDbContext<GameDbContext>(options => {
-    options.UseNpgsql(builder.Configuration.GetConnectionString("GameDb"),
-        x => x.MigrationsAssembly("GameAPI.Infrastructure"));
-    options.EnableSensitiveDataLogging();
-});*/
-
-//builder.Services.AddScoped<DbContext, GameDbContext>();
 builder.Services.AddScoped<IGameRepository, GameRepository>();
 builder.Services.AddScoped<IGenreRepository, GenreRepository>();
 builder.Services.AddScoped<IDeveloperRepository, DeveloperRepository>();
