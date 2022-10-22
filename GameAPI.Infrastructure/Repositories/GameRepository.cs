@@ -48,7 +48,7 @@ public class GameRepository : IGameRepository
     }
 
     public async Task<GameEntity> GetById(Guid id)
-    {//sad
+    {
         var result = await _gameDbContext.Games
             .Include(x => x.Genres)
             .Include(x => x.DeveloperStudio)
