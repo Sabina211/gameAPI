@@ -25,10 +25,10 @@ namespace GameAPI.Infrastructure.Repositories
             return result;
         }
 
-        public Task<DeveloperEntity> GetById(Guid id)
+        public async Task<DeveloperEntity> GetById(Guid id)
         {
-            var result = _gameDbContext.Developers.FirstOrDefaultAsync(x=>x.Id==id);
-            if (result == null) throw new EntityNotFoundException();
+            var result = await _gameDbContext.Developers.FirstOrDefaultAsync(x=>x.Id==id);
+            if (result == null) throw new EntityNotFoundException($"Разработчик с id = {id} не существует");
             return result;
         }
     }

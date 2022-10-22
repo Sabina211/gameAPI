@@ -1,6 +1,7 @@
 ﻿using GameAPI.Application.Services;
 using GameAPI.Domain.Entities;
 using GameAPI.Domain.Models;
+using GameAPI.Web.Middlewares;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GameAPI.Web.Controllers
@@ -36,6 +37,12 @@ namespace GameAPI.Web.Controllers
             var games = await _gameService.GetById(id);
             return Ok(new { games });
         }
+
+        /// <summary>
+        /// Получить список игр, у которых есть один из заданных жанров
+        /// </summary>
+        /// <param name="ids">Id жанров</param>
+        /// <returns></returns>
 
         [HttpGet("getByGenres")]
         public IActionResult GetByGenres([FromQuery] List<Guid> ids)

@@ -1,4 +1,5 @@
 ﻿using GameAPI.Domain.Exceptions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
@@ -18,12 +19,26 @@ namespace GameAPI.Web.Middlewares
             var actionName = context.ActionDescriptor.DisplayName;
             var exceptionStack = context.Exception.StackTrace;
             var exceptionMessage = context.Exception.Message;
+            var statusCode = 400;
 
-            var statusCode = true switch
+            switch (true)
             {
-                { } when context.Exception is EntityNotFoundException => 404,
-                _ => 400
-            };
+                case { } when context.Exception is EntityNotFoundException:
+                    {
+                        statusCode = 404;
+                        break;
+                    }
+                case { } when context.Exception.InnerException is EntityNotFoundException:
+                    {
+                        statusCode = 404;
+                        exceptionMessage = context.Exception.InnerException.Message;
+                        break;
+                    }
+                default:
+                    {
+                        break;
+                    }
+            }
 
             context.Result = new JsonResult(exceptionMessage)
             {

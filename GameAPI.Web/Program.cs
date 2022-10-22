@@ -10,7 +10,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-//builder.Services.AddSwaggerGen();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "GameAPI", Version = "v1" });
@@ -27,9 +26,14 @@ builder.Services.AddScoped<IGameService, GameService>();
 builder.Services.AddScoped<IGenreService, GenreService>();
 builder.Services.AddScoped<IDeveloperService, DeveloperService>();
 
-builder.Services.AddMvc(options =>
+/*builder.Services.AddMvc(options =>
 {
     options.Filters.Add(typeof(CustomExceptionFilter));
+});*/
+
+builder.Services.AddControllersWithViews(options =>
+{
+    options.Filters.Add<CustomExceptionFilter>();
 });
 var app = builder.Build();
 using (var scope = app.Services.CreateScope())

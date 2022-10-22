@@ -32,7 +32,7 @@ namespace GameAPI.Infrastructure.Repositories
             foreach (var genreId in genreIds)
             {
                 var genre = await _gameDbContext.Genres.Include(x=>x.Games).FirstOrDefaultAsync(x => x.Id == genreId);
-                if (genre == null) throw new EntityNotFoundException();
+                if (genre == null) throw new EntityNotFoundException($"Не удалось найти жанр с id {genreId}");
                 result.Add(genre);
             }
             return result;

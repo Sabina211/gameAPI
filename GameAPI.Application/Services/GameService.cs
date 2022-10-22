@@ -20,6 +20,7 @@ namespace GameAPI.Application.Services
 
         public async Task<Guid> Create(GameModel game)
         {
+            
             return await _gameRepository.Create(new GameEntity
             {
                 Id = game.Id,
@@ -54,6 +55,7 @@ namespace GameAPI.Application.Services
 
         public async Task<List<GameResponseModel>> GetByGenres(List<Guid> ids)
         {
+            if (ids.Count==0) return GetAll();
             var test = await _genreRepository.GetByIds(ids);
             var gameCollection = new List<GameEntity>();
             foreach (var item in test)
