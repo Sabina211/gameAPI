@@ -6,7 +6,7 @@ namespace GameAPI.Application.Services
     public interface IGameService
     {
         public Task<Guid> Create(GameModel game);
-        public List<GameEntity> GetAll();
+        public List<GameResponseModel> GetAll();
         public Task<GameEntity> GetById(Guid id);
         public Task<GameEntity> Update(GameEntity game);
         public Task Delete(Guid id);

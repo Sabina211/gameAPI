@@ -1,6 +1,7 @@
 ﻿using GameAPI.Domain.Entities;
 using GameAPI.Domain.Models;
 using GameAPI.Domain.Repositories;
+using System.Xml.Linq;
 
 namespace GameAPI.Application.Services
 {
@@ -24,8 +25,8 @@ namespace GameAPI.Application.Services
                 Id = game.Id,
                 Name = game.Name,
                 DeveloperStudio = await _developerRepository.GetById(game.DeveloperStudioId),
-                Genres = new List<GenreEntity>(){ await _genreRepository.GetById(game.GenresIds[0]) }
-            }); ;
+                Genres = await _genreRepository.GetByIds(game.GenresIds)
+            }) ;
         }
 
         public async Task Delete(Guid id)
@@ -33,9 +34,17 @@ namespace GameAPI.Application.Services
             await _gameRepository.Delete(id);
         }
 
-        public List<GameEntity> GetAll()
+        public List<GameResponseModel> GetAll()
         {
-            return _gameRepository.GetAll();
+            var result = _gameRepository.GetAll()
+                .Select(x => new GameResponseModel
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Developer = x.DeveloperStudio,
+                    Genres = x.Genres.Select(p=>new GenreModel {Id = p.Id, Name=p.Name }).ToList()
+                }).ToList() ;
+            return result;
         }
 
         public async Task<GameEntity> GetById(Guid id)

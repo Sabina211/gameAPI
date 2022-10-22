@@ -26,5 +26,16 @@ namespace GameAPI.Infrastructure.Repositories
             if (result == null) throw new EntityNotFoundException();
             return result;
         }
+        public async Task<List<GenreEntity>> GetByIds(List<Guid> genreIds)
+        {
+            var result = new List<GenreEntity>(); 
+            foreach (var genreId in genreIds)
+            {
+                var genre = await _gameDbContext.Genres.FirstOrDefaultAsync(x => x.Id == genreId);
+                if (genre == null) throw new EntityNotFoundException();
+                result.Add(genre);
+            }
+            return result;
+        }
     }
 }

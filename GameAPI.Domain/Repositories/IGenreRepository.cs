@@ -11,5 +11,6 @@ namespace GameAPI.Domain.Repositories
     {
         public Task<GenreEntity> GetById(Guid id);
         public List<GenreEntity> GetAll();
+        public Task<List<GenreEntity>> GetByIds(List<Guid> genreIds);
     }
 }

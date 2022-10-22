@@ -8,15 +8,11 @@ using System.Threading.Tasks;
 
 namespace GameAPI.Domain.Models
 {
-    public class GameModel
+    public class GameResponseModel
     {
-        [Required]
         public Guid Id { get; set; }
-        [Required]
         public string Name { get; set; } = null!;
-        [Required]
-        public Guid DeveloperStudioId { get; set; }
-        [Required]
-        public List<Guid>? GenresIds { get; set; }
+        public DeveloperEntity Developer { get; set; }
+        public List<GenreModel>? Genres { get; set; }
     }
 }

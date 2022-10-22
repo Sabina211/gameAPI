@@ -16,22 +16,22 @@ public class GameRepository : IGameRepository
 
     public async Task<Guid> Create(GameEntity game)
     {
-        var genre = await _gameDbContext.Genres.FirstOrDefaultAsync(x => x.Id == game.Genres[0].Id);
-        var developer = await _gameDbContext.Developers.FirstOrDefaultAsync(x => x.Id == game.DeveloperStudio.Id);
-        if (genre == null) throw new Exception("Нет жанра с таким id");
-        if (developer == null) throw new Exception("Нет разработчика с таким id");
+        // var genres = await _gameDbContext.Genres.FirstOrDefaultAsync(x => x.Id == game.Genres[0].Id);
+        //var genres =  _gameDbContext.Genres.ToList();
+        //var developer = await _gameDbContext.Developers.FirstOrDefaultAsync(x => x.Id == game.DeveloperStudio.Id);
+        //if (genres == null) throw new Exception("Нет жанра с таким id");
+        //if (developer == null) throw new Exception("Нет разработчика с таким id");
         GameEntity game1 = new GameEntity
         {
             Id = game.Id,
             Name = game.Name,
-            DeveloperStudio = developer,
-            Genres = new List<GenreEntity> { genre }
+            DeveloperStudio = game.DeveloperStudio,
+            Genres = game.Genres
         };
         var result = await _gameDbContext.Games.AddAsync(game1);
         await _gameDbContext.SaveChangesAsync();
 
          return result.Entity.Id;
-        //return Guid.Empty;
     }
 
     public async Task Delete(Guid entity)
