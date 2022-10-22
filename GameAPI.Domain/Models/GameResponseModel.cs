@@ -12,7 +12,7 @@ namespace GameAPI.Domain.Models
     {
         public Guid Id { get; set; }
         public string Name { get; set; } = null!;
-        public DeveloperEntity Developer { get; set; }
+        public DeveloperEntity Developer { get; set; } = null!;
         public List<GenreModel>? Genres { get; set; }
     }
 }

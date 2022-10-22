@@ -31,7 +31,7 @@ namespace GameAPI.Infrastructure.Repositories
             var result = new List<GenreEntity>(); 
             foreach (var genreId in genreIds)
             {
-                var genre = await _gameDbContext.Genres.FirstOrDefaultAsync(x => x.Id == genreId);
+                var genre = await _gameDbContext.Genres.Include(x=>x.Games).FirstOrDefaultAsync(x => x.Id == genreId);
                 if (genre == null) throw new EntityNotFoundException();
                 result.Add(genre);
             }

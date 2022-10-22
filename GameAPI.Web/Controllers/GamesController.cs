@@ -37,6 +37,13 @@ namespace GameAPI.Web.Controllers
             return Ok(new { games });
         }
 
+        [HttpGet("getByGenres")]
+        public IActionResult GetByGenres([FromQuery] List<Guid> ids)
+        {
+            var games = _gameService.GetByGenres(ids).Result;
+            return Ok(new { games });
+        }
+
         [HttpPut]
         public async Task<IActionResult> Update(GameEntity game)
         {

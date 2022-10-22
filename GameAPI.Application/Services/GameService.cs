@@ -52,6 +52,31 @@ namespace GameAPI.Application.Services
             return await _gameRepository.GetById(id);
         }
 
+        public async Task<List<GameResponseModel>> GetByGenres(List<Guid> ids)
+        {
+            var test = await _genreRepository.GetByIds(ids);
+            var gameCollection = new List<GameEntity>();
+            foreach (var item in test)
+            {
+                foreach (var game in item.Games)
+                {
+                    gameCollection.Add(game);
+                }
+            }
+
+            var games = new List<GameEntity>();
+            games.AddRange(gameCollection.Distinct());
+            var last = games.Select(x => new GameResponseModel
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Developer = _gameRepository.GetAll().FirstOrDefault(p=>p.Id==x.Id).DeveloperStudio,
+                Genres = x.Genres.Select(p => new GenreModel { Id = p.Id, Name = p.Name }).ToList()
+            }).ToList();
+
+            return last;
+        }
+
         public async Task<GameEntity> Update(GameEntity game)
         {
             return await _gameRepository.Update(game);

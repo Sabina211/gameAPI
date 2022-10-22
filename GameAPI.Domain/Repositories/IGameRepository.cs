@@ -7,6 +7,7 @@ public interface IGameRepository
     public Task<Guid> Create(GameEntity game);
     public List<GameEntity> GetAll();
     public Task<GameEntity> GetById(Guid id);
+    public List<GameEntity> GetByGenres(List<Guid> ids);
     public Task<GameEntity> Update(GameEntity game);
     public Task Delete(Guid entity);
 }

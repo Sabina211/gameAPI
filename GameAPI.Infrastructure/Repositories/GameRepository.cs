@@ -16,11 +16,6 @@ public class GameRepository : IGameRepository
 
     public async Task<Guid> Create(GameEntity game)
     {
-        // var genres = await _gameDbContext.Genres.FirstOrDefaultAsync(x => x.Id == game.Genres[0].Id);
-        //var genres =  _gameDbContext.Genres.ToList();
-        //var developer = await _gameDbContext.Developers.FirstOrDefaultAsync(x => x.Id == game.DeveloperStudio.Id);
-        //if (genres == null) throw new Exception("Нет жанра с таким id");
-        //if (developer == null) throw new Exception("Нет разработчика с таким id");
         GameEntity game1 = new GameEntity
         {
             Id = game.Id,
@@ -44,7 +39,6 @@ public class GameRepository : IGameRepository
 
     public List<GameEntity> GetAll()
     {
-        //var result = _gameDbContext.Games.ToList();
         var res = _gameDbContext.Games
             .Include(x => x.Genres)
             .Include(x => x.DeveloperStudio)
@@ -59,6 +53,18 @@ public class GameRepository : IGameRepository
             .Include(x => x.Genres)
             .Include(x => x.DeveloperStudio)
             .FirstOrDefaultAsync(x => x.Id == id);
+
+        if (result == null) throw new EntityNotFoundException();
+
+        return result;
+    }
+
+    public List<GameEntity> GetByGenres(List<Guid> ids)
+    {
+        var result = _gameDbContext.Games
+            .Include(x => x.Genres)
+            .Include(x => x.DeveloperStudio)
+            .ToList();
 
         if (result == null) throw new EntityNotFoundException();
 
