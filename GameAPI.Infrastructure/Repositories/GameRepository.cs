@@ -53,7 +53,6 @@ public class GameRepository : IGameRepository
             .Include(x => x.Genres)
             .Include(x => x.DeveloperStudio)
             .FirstOrDefaultAsync(x => x.Id == id);
-
         if (result == null) throw new EntityNotFoundException($"»гра с id = {id} не найдена");
 
         return result;
