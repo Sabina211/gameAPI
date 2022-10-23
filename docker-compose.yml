@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:15.0
+    restart: unless-stopped
+    env_file: gameapi.env
+    ports:
+      - 5432:5432 
+
+  gameapi.web:
+    container_name: gameapi-api
+    build:
+      context: .
+      dockerfile: GameAPI.Web/Dockerfile
+    image: gameapi-image
+    env_file: gameapi.env
+    restart: unless-stopped
+    ports:
+      - 85:80
+      - 86:443
