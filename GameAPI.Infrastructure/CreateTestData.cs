@@ -49,6 +49,20 @@ namespace GameAPI.Infrastructure
                 trans.Commit();
             }
 
+            var adv =  gameDbContext.Genres.FirstOrDefault(x=>x.Name.Contains("Приключения"));
+            var nintendo = gameDbContext.Developers.FirstOrDefault(x => x.Name.Contains("Nintendo"));
+            if (adv == null || nintendo == null) return;
+            var game = new GameEntity
+            { Id = Guid.NewGuid(),  Name = "Super Mario Odyssey", 
+                Genres = new List<GenreEntity>{ adv }, DeveloperStudio= nintendo  
+            };
+            using (var trans = gameDbContext.Database.BeginTransaction())
+            {
+                gameDbContext.Games.Add(game);
+                gameDbContext.SaveChanges();
+                trans.Commit();
+            }
+
         }
     }
 }
